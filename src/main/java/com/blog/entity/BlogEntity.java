@@ -62,16 +62,17 @@ public class BlogEntity implements Serializable{
 	}
 
 	@Column(name="likes")
-	private int likes;
+	private long likes;
 	
 
-	public int getLikes() {
+	public long getLikes() {
 		return likes;
 	}
 
-	public void setLikes(int likes) {
+	public void setLikes(long likes) {
 		this.likes = likes;
 	}
+
 
 
 	public void setBlogTime(Date blogTime) {
