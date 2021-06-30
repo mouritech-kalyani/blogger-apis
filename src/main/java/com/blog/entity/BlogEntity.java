@@ -61,7 +61,18 @@ public class BlogEntity implements Serializable{
 		return blogTime;
 	}
 
+	@Column(name="likes")
+	private int likes;
 	
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
 
 	public void setBlogTime(Date blogTime) {
 		this.blogTime = blogTime;
