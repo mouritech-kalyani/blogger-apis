@@ -91,5 +91,8 @@ public class UserEntity implements Serializable{
 	
 	@OneToMany(targetEntity = BlogEntity.class, mappedBy = "user", fetch = FetchType.LAZY)
 	private List<BlogEntity> blogs;
+	
+	@OneToMany(targetEntity = CommentsEntity.class, mappedBy = "user", fetch = FetchType.LAZY)
+	private List<CommentsEntity> comments;
 //	
 }

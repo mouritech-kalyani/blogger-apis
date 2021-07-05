@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.entity.BlogEntity;
+import com.blog.entity.CommentsEntity;
 import com.blog.entity.UserEntity;
 import com.blog.service.BlogService;
+import com.blog.service.CommentsService;
 import com.blog.service.UserService;
 
 @RestController
@@ -30,6 +32,9 @@ public class BlogController {
 	@Autowired 
 	private BlogService blogService;
 	
+	@Autowired
+	private CommentsService commentService;
+	
 	
 	//Get all Users
 	
@@ -38,6 +43,17 @@ public class BlogController {
 			List result= userService.getUsers();
 			return new ResponseEntity<>(result,HttpStatus.OK);
 		}
+	
+	//Get user by user id
+	@GetMapping("/user-by-id/{user_id}")
+	public ResponseEntity<UserEntity> getUserById(@PathVariable(name = "user_id") Long user_id) {
+		UserEntity result= userService.getUserById(user_id);
+		if(result == null) {
+			return new ResponseEntity<>(null,HttpStatus.OK);
+		}
+		return new ResponseEntity<>(result,HttpStatus.OK);
+	}
+	
 	
 	//Sign Up for User
 	
@@ -112,12 +128,31 @@ public class BlogController {
 	
 	
 	//Delete Blog by Id
-	@DeleteMapping("blogs/{blog_id}")
+	@DeleteMapping("/blogs/{blog_id}")
 	public ResponseEntity<String> deleteBlogByUserId(@PathVariable(name = "blog_id") Long blogId) {
 		Boolean result= blogService.deleteBlogByUserId(blogId);
 		if(result) {
 			return new ResponseEntity<>("Blog Deleted Successfully !",HttpStatus.OK);
 		}
 		return new ResponseEntity<>("No data Found for this Id",HttpStatus.OK);
+	}
+	
+	//Add comments
+	@PostMapping("/comments")
+	public ResponseEntity<String> addComments(@RequestBody CommentsEntity comm) {
+		List result= commentService.addComments(comm);
+
+		return new ResponseEntity<>("Comment Uploaded Successfully !",HttpStatus.OK);
+	}
+	
+	//Get Comments,users data by passing Blog Id
+	
+	@GetMapping("/comments/{blog_id}")
+	public ResponseEntity<List<CommentsEntity>> getAllCommentData(@PathVariable(name = "blog_id") Long blog_id) {
+		List<CommentsEntity> result= commentService.getAllCommentData(blog_id);
+		if(result == null) {
+			return new ResponseEntity<>(null,HttpStatus.OK);
+		}
+		return new ResponseEntity<List<CommentsEntity>>(result,HttpStatus.OK);
 	}
 }

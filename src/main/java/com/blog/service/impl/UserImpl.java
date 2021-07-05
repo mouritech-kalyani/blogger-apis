@@ -1,6 +1,8 @@
 package com.blog.service.impl;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,15 +48,12 @@ public class UserImpl implements UserService{
 	}
 
 
-//	@Override
-//	public List<UserEntity> getAllInfoOfUser(Long userId) {
-//		List<UserEntity> res=userJpa.findAllByUserId(userId);
-//		return res;
-//	}
-	
-//	@Override
-//	public List<UserEntity> getBlogs() {
-//		List<UserEntity> res=userJpa.findAllBlogs();
-//		return res;
-//	}
+	@Override
+	public UserEntity getUserById(Long user_id) {
+		Optional<UserEntity> result =userJpa.findById(user_id);
+	    UserEntity userdetails=result.get();
+		return userdetails;
+	}
+
+
 }

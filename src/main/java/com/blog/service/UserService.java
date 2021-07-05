@@ -17,6 +17,8 @@ public interface UserService {
 	
 	public UserEntity updateProfile(UserEntity obj1);
 
+	public UserEntity getUserById(Long user_id);
+
 //	public List<UserEntity> getAllInfoOfUser(Long usersId);
 	
 //	public List<UserEntity> getBlogs();
