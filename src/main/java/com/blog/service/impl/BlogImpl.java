@@ -1,5 +1,6 @@
 package com.blog.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,13 +8,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blog.entity.BlogEntity;
+import com.blog.entity.FollowersEntity;
 import com.blog.entity.UserEntity;
 import com.blog.jpa.BlogJpa;
+import com.blog.jpa.FollowersJpa;
 import com.blog.service.BlogService;
 
 @Service
 public class BlogImpl implements BlogService {
 	@Autowired BlogJpa blogJpa;
+	@Autowired FollowersJpa followersJpa;
 
 	@Override
 	public List<BlogEntity> getBlogs() {
@@ -50,6 +54,17 @@ public class BlogImpl implements BlogService {
 		}
 		return false;
 		
+	}
+
+	@Override
+	public List<BlogEntity> getAllBlogsForLoggedInUser(Long user_user_id) {
+		List<FollowersEntity> unfollowusers = followersJpa.getUnfollowUser(user_user_id);
+		List<Long> unfollowersid= new ArrayList<Long>();
+		unfollowusers.forEach((a)->{
+			unfollowersid.add(a.getUser2().getUserId());
+		});
+		List <BlogEntity> allBlogs=blogJpa.getAllBlogs(unfollowersid);
+		return allBlogs;
 	}
 
 

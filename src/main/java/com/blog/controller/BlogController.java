@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.entity.BlogEntity;
 import com.blog.entity.CommentsEntity;
+import com.blog.entity.FollowersEntity;
 import com.blog.entity.UserEntity;
 import com.blog.service.BlogService;
 import com.blog.service.CommentsService;
+import com.blog.service.FollowersService;
 import com.blog.service.UserService;
 
 @RestController
@@ -34,6 +36,9 @@ public class BlogController {
 	
 	@Autowired
 	private CommentsService commentService;
+	
+	@Autowired
+	private FollowersService followersService;
 	
 	
 	//Get all Users
@@ -88,8 +93,14 @@ public class BlogController {
 	
 	}
 	
+	//Get blogs for current user
+		@GetMapping("/blogs/{user_user_id}")
+		public ResponseEntity<List> getAllBlogsForLoggedInUser(@PathVariable(name="user_user_id") Long user_user_id) {
+			List<BlogEntity> result= blogService.getAllBlogsForLoggedInUser(user_user_id);
+			return new ResponseEntity<>(result,HttpStatus.OK);
+		}
 	
-	// Get all Blogs with Join
+	// Get all Blogs for logged in user
 	
 	@GetMapping("/blogs")
 	public ResponseEntity<List> getBlogs() {
@@ -155,4 +166,26 @@ public class BlogController {
 		}
 		return new ResponseEntity<List<CommentsEntity>>(result,HttpStatus.OK);
 	}
+	
+	//Follow to the user
+	@PostMapping("/follow")
+	public ResponseEntity<String> followUser(@RequestBody FollowersEntity obj1) {
+		String result= followersService.followUser(obj1);
+		if(result != "Error")
+		{
+			return new ResponseEntity<>("Follow Successfully !",HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("Error",HttpStatus.OK);
+		}
+		
+	}
+	
+	// Get all users other than following users
+	
+	@GetMapping("/get-all-unfollow/{user_user_id}")
+	public ResponseEntity<List> unfollowUser(@PathVariable(name="user_user_id") Long user_user_id) {
+	List result= followersService.unfollowUser(user_user_id);
+		return new ResponseEntity<>(result,HttpStatus.OK);
+	}
+	
 }

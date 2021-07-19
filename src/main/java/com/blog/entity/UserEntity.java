@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -94,5 +95,10 @@ public class UserEntity implements Serializable{
 	
 	@OneToMany(targetEntity = CommentsEntity.class, mappedBy = "user", fetch = FetchType.LAZY)
 	private List<CommentsEntity> comments;
-//	
+	
+	@OneToMany(targetEntity = FollowersEntity.class, mappedBy = "user1", fetch = FetchType.LAZY)
+	private List<FollowersEntity> followers;
+  
+	@OneToMany(targetEntity = FollowersEntity.class, mappedBy = "user2", fetch = FetchType.LAZY)
+	private List<FollowersEntity> followers1; 
 }

@@ -17,5 +17,7 @@ public interface BlogJpa extends JpaRepository<BlogEntity,Long>{
 	@Query("Select b from UserEntity a inner join BlogEntity b on a.userId = b.user")
 	public List<BlogEntity> getBlogs();
 	
+	@Query("Select b from BlogEntity b where b.user.userId in :getAllBlogs") 
+	List<BlogEntity> getAllBlogs(List<Long> getAllBlogs);
 
 }
