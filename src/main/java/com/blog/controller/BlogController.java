@@ -207,4 +207,12 @@ public class BlogController {
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
 	
+		
+	//Count Blogs
+	
+	@GetMapping("/get-blogs-count/{user_id}")
+	public int noOfBlogs(@PathVariable(name="user_id") Long user_id) {
+		int result=blogService.noOfBlogs(user_id);
+		return result;
+	}
 }
