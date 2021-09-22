@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -79,7 +78,8 @@ public class BlogEntity implements Serializable{
 	public void setBlogTime(Date blogTime) {
 		this.blogTime = blogTime;
 	}
-
+	
+	
 	@OneToMany(targetEntity = CommentsEntity.class, mappedBy = "blogs", fetch = FetchType.LAZY)
 	private List<CommentsEntity> comments;
 	

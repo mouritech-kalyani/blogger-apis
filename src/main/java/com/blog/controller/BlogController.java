@@ -25,7 +25,6 @@ import com.blog.service.UserService;
 
 @RestController
 @CrossOrigin("*")
-//@RequestMapping("blogger")
 public class BlogController {
 
 	@Autowired 
@@ -63,12 +62,9 @@ public class BlogController {
 	//Sign Up for User
 	
 	@PostMapping("/sign-up")
-	public ResponseEntity<String> addUser(@RequestBody UserEntity obj1) {
-		List result= userService.addUser(obj1);
-		if(result == null) {
-			return new ResponseEntity<>("Email already Exists !",HttpStatus.OK);
-		}
-		return new ResponseEntity<>("Record Added Successfully !",HttpStatus.OK);
+	public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity obj1) {
+		UserEntity result= userService.addUser(obj1);
+		return new ResponseEntity<UserEntity>(result,HttpStatus.OK);
 	}
 	
 	//Log in For User
@@ -186,6 +182,29 @@ public class BlogController {
 	public ResponseEntity<List> unfollowUser(@PathVariable(name="user_user_id") Long user_user_id) {
 	List result= followersService.unfollowUser(user_user_id);
 		return new ResponseEntity<>(result,HttpStatus.OK);
+	}
+	
+	//Get count of following
+	@GetMapping("/get-following-count/{user_id}")
+	public int noOfFollowing(@PathVariable(name="user_id") Long user_id) {
+		int result=followersService.noOfFollowing(user_id);
+		return result;
+	}
+	
+	//Get count of Followers
+	
+	@GetMapping("/get-followers-count/{user_id}")
+	public int noOfFollowers(@PathVariable(name="user_id") Long user_id){
+		int result=followersService.noOfFollowers(user_id);
+		return result;
+	}
+	
+	//Change account status
+	@PutMapping("/change-account-status")
+	public ResponseEntity<UserEntity> changeStatus(@RequestBody UserEntity obj1)
+	{
+		UserEntity res=userService.changeStatus(obj1);
+		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
 	
 }

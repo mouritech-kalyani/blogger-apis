@@ -1,7 +1,6 @@
 package com.blog.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +42,18 @@ public class FollowersImpl implements FollowersService{
 		List unfollowersuser=usersJpa.getUnfollowers(unfollowersid);
 		System.out.println(unfollowersuser);
 		return unfollowersuser;
+	}
+
+	@Override
+	public int noOfFollowing(Long user_id) {
+		int counts = followersJpa.getFollowingCount(user_id);
+		return counts;
+	}
+	
+	@Override
+	public int noOfFollowers(Long user_id) {
+		int counts = followersJpa.getFollowersCount(user_id);
+		return counts;
 	}
 
 }

@@ -11,16 +11,15 @@ public interface UserService {
 
 	public List<UserEntity> getUsers();
 	
-	public List<UserEntity> addUser(UserEntity obj1);
+	public UserEntity addUser(UserEntity obj1);
 	
 	public List<UserEntity> logIn(String username,String password);
 	
 	public UserEntity updateProfile(UserEntity obj1);
 
 	public UserEntity getUserById(Long user_id);
-
-//	public List<UserEntity> getAllInfoOfUser(Long usersId);
 	
-//	public List<UserEntity> getBlogs();
+	public UserEntity changeStatus(UserEntity obj1);
+
 
 }

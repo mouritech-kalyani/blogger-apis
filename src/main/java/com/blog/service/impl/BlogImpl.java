@@ -5,11 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.blog.entity.BlogEntity;
 import com.blog.entity.FollowersEntity;
-import com.blog.entity.UserEntity;
 import com.blog.jpa.BlogJpa;
 import com.blog.jpa.FollowersJpa;
 import com.blog.service.BlogService;

@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -89,7 +88,16 @@ public class UserEntity implements Serializable{
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	
+	@Column(name="account_status")
+	private String accountStatus;
+
+	public String getAccountStatus() {
+		return accountStatus;
+	}
+
+	public void setAccountStatus(String accountStatus) {
+		this.accountStatus = accountStatus;
+	}
 	@OneToMany(targetEntity = BlogEntity.class, mappedBy = "user", fetch = FetchType.LAZY)
 	private List<BlogEntity> blogs;
 	

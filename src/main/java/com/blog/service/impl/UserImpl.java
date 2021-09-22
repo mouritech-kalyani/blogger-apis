@@ -3,6 +3,8 @@ package com.blog.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +25,13 @@ public class UserImpl implements UserService{
 
 
 	@Override
-	public List<UserEntity> addUser(UserEntity obj1) {
-		List<UserEntity> emptyRes = null;
+	public UserEntity addUser(UserEntity obj1) {
+		UserEntity emptyRes = null;
 		List<UserEntity> res= userJpa.findByUsername(obj1.getUsername());
 			if(res.isEmpty())
-			{
-				userJpa.save(obj1);
-				return userJpa.findAll();
+			{	
+				UserEntity result = userJpa.save(obj1);
+				return result;
 			}
 			return emptyRes;
 		
@@ -53,6 +55,13 @@ public class UserImpl implements UserService{
 		Optional<UserEntity> result =userJpa.findById(user_id);
 	    UserEntity userdetails=result.get();
 		return userdetails;
+	}
+
+	// @Transactional
+	@Override
+	public UserEntity  changeStatus(UserEntity obj1) {
+	UserEntity res=userJpa.save(obj1);
+		return res;
 	}
 
 
