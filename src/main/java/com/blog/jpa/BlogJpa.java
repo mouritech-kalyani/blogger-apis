@@ -20,4 +20,6 @@ public interface BlogJpa extends JpaRepository<BlogEntity,Long>{
 	@Query("Select b from BlogEntity b where b.user.userId in :getAllBlogs") 
 	List<BlogEntity> getAllBlogs(List<Long> getAllBlogs);
 
+	@Query("select count(b.blogId) from BlogEntity b where b.user.userId = :user_id")
+	int getBlogsCount(@Param("user_id") Long user_id);
 }
