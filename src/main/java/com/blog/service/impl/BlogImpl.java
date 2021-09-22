@@ -64,6 +64,12 @@ public class BlogImpl implements BlogService {
 		List <BlogEntity> allBlogs=blogJpa.getAllBlogs(unfollowersid);
 		return allBlogs;
 	}
+	
+	@Override
+	public int noOfBlogs(Long user_id) { 
+		int counts = blogJpa.getBlogsCount(user_id);
+		return counts;
+	}
 
 
 }
