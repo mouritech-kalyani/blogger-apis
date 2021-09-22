@@ -20,4 +20,6 @@ public interface BlogService {
 	public Boolean deleteBlogByUserId(Long blogId);
 
 	public List<BlogEntity> getAllBlogsForLoggedInUser(Long user_user_id);
+	
+	public int noOfBlogs(Long user_id);
 }
