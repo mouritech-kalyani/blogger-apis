@@ -218,7 +218,7 @@ public class BlogController {
 	
 	//Get User Details by Email Id
 	
-	@GetMapping("/get-by-emailId")
+	@PostMapping("/get-by-emailId")
 	public ResponseEntity<UserEntity> getUserByEmail(@RequestBody UserEntity obj1){
 		UserEntity result= userService.getUserByEmail(obj1);
 			return new ResponseEntity<>(result,HttpStatus.OK);
