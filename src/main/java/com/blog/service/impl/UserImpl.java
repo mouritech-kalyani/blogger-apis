@@ -65,4 +65,15 @@ public class UserImpl implements UserService{
 	}
 
 
+	@Override
+	public UserEntity getUserByEmail(UserEntity obj1) {
+		UserEntity emptyRes = null;
+		List<UserEntity> res= userJpa.findByUsername(obj1.getUsername());
+			if(res.isEmpty())
+			{	
+				return emptyRes;
+			}
+			return res.get(0);
+	}
+
 }

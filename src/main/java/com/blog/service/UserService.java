@@ -20,6 +20,8 @@ public interface UserService {
 	public UserEntity getUserById(Long user_id);
 	
 	public UserEntity changeStatus(UserEntity obj1);
+	
+	public UserEntity getUserByEmail(UserEntity obj1);
 
 
 }

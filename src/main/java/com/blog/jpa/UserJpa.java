@@ -21,6 +21,4 @@ public interface UserJpa extends JpaRepository<UserEntity,Long>{
 	
 	@Query("Select u from UserEntity u where u.userId not in :unfollowersid and u.accountStatus='activate'") 
 	List getUnfollowers(List<Long> unfollowersid);
-	
-
 }
